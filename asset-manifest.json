@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/sudoku-puzzle/static/css/main.8eb31deb.css",
-    "main.js": "/sudoku-puzzle/static/js/main.1eb60e9f.js",
+    "main.css": "/sudoku-puzzle/static/css/main.668e779b.css",
+    "main.js": "/sudoku-puzzle/static/js/main.8d08bc77.js",
     "index.html": "/sudoku-puzzle/index.html",
-    "main.8eb31deb.css.map": "/sudoku-puzzle/static/css/main.8eb31deb.css.map",
-    "main.1eb60e9f.js.map": "/sudoku-puzzle/static/js/main.1eb60e9f.js.map"
+    "main.668e779b.css.map": "/sudoku-puzzle/static/css/main.668e779b.css.map",
+    "main.8d08bc77.js.map": "/sudoku-puzzle/static/js/main.8d08bc77.js.map"
   },
   "entrypoints": [
-    "static/css/main.8eb31deb.css",
-    "static/js/main.1eb60e9f.js"
+    "static/css/main.668e779b.css",
+    "static/js/main.8d08bc77.js"
   ]
 }

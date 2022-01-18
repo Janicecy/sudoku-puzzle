@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.8eb31deb.css","mappings":"AAAA,EACE,qBAAsB,CACtB,gDAAuD,CACvD,QACF","sources":["index.css"],"sourcesContent":["* {\n  box-sizing: border-box;\n  font-family: \"Lucida Console\", \"Courier New\", monospace;\n  margin: 0;\n}"],"names":[],"sourceRoot":""}
