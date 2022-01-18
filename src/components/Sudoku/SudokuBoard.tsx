@@ -1,6 +1,6 @@
 import { Board, Cell } from '../../interface'
 import { makeStyles } from '@mui/styles';
-import { useRef, useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { isValid } from './board'
 
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     borderLeft: outerBorder,
     borderBottom: outerBorder,
     height: 500,
-    flexBasis: '60%'
+    width: 500
   },
   highlighted: {
     backgroundColor: 'rgb(226 235 243)'

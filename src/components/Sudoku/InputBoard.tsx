@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { makeStyles } from "@mui/styles";
 import { Button, Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import React from 'react'
 
 interface InputBoardProps {
   numberOnClick: (num: number) => void

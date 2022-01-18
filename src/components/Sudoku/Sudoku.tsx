@@ -28,15 +28,15 @@ interface CircleButtonProps {
 
 const useStyles = makeStyles({
   root: {
-    margin: 20
+    margin: '20px auto',
+    width: 900,
   },
   game: {
     display: 'flex',
     marginTop: 20
   },
-  leftPanel: {
-    maxWidth: 500,
-    flexBasis: '40%',
+  controlPanel: {
+    width: 400,
     marginLeft: 20,
     display: 'flex',
     flexWrap: 'wrap'
@@ -188,7 +188,7 @@ export default function Sudoku() {
           board={board}
           activeCellOnChange={(cell: Cell) => setActiveCell(cell)}
         />
-        <Box className={classes.leftPanel}>
+        <Box className={classes.controlPanel}>
           <Button
             className={classes.button}
             variant="contained"
