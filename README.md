@@ -1,8 +1,7 @@
 # Sudoku-puzzle
 [Sudoku](https://janicecy.github.io/sudoku-puzzle/) - Watch your computer play Sudoku.
 ## Built With
-- React
-- Typescript
+- React + TypeScript
 - Material-UI
 ## Setup
 Install dependencies:
