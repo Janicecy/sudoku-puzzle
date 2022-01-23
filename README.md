@@ -11,5 +11,5 @@ yarn start
 ```
 ## Screenshots
 ![Image text](https://github.com/Janicecy/sudoku-puzzle/blob/master/demo-imgs/init.png)
-<img src="https://github.com/Janicecy/sudoku-puzzle/blob/master/demo-imgs/init.png"/>
+<img src="https://github.com/Janicecy/sudoku-puzzle/blob/master/demo-imgs/play.png"/>
 <img src="https://github.com/Janicecy/sudoku-puzzle/blob/master/demo-imgs/gif.gif"/>
