@@ -1,12 +1,12 @@
-import { Board, Cell } from '../../interface'
+import { IBoard, ICell } from './typings'
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import classNames from 'classnames';
-import { isValid } from './board'
+import { isValid } from './models/board'
 
-interface SudokuBoardProps {
-  board: Board,
-  activeCellOnChange: (cell: Cell) => void
+interface IProps {
+  board: IBoard,
+  activeCellOnChange: (cell: ICell) => void
 }
 
 const outerBorder = '2px solid rgb(52 72 97)'
@@ -58,17 +58,17 @@ const useStyles = makeStyles({
   },
 })
 
-export default function SudokuBoard(props: SudokuBoardProps) {
+export default function SudokuBoard(props: IProps): ReactElement {
   const classes = useStyles()
   const { board, activeCellOnChange } = props
-  const [activeCell, setActiveCell] = useState<Cell | null>(null)
+  const [activeCell, setActiveCell] = useState<ICell | null>(null)
 
-  const handleCellOnClick = (cell: Cell) => {
+  const handleCellOnClick = (cell: ICell) => {
     setActiveCell(cell)
     activeCellOnChange(cell)
   }
 
-  const getColor = (cell: Cell): string => {
+  const getColor = (cell: ICell): string => {
     const { disabled, coord, val } = cell
     if (disabled) return 'black'
     return isValid(board, coord, val) ? "green" : 'red'
@@ -78,7 +78,7 @@ export default function SudokuBoard(props: SudokuBoardProps) {
     <div className={classes.root}>
       {board.map((r, row) => (
         <div key={`row-${row}`} className={classes.row}>
-          {r.map((cell: Cell, col) => (
+          {r.map((cell: ICell, col) => (
             <div className={
               classNames(
                 classes.col,

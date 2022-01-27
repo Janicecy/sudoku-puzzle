@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Box, FormControl, Select, MenuItem, InputLabel } from '@mui/material'
 import { makeStyles } from "@mui/styles";
-
 
 const useStyles = makeStyles({
   root: {
@@ -16,12 +15,12 @@ export const DIFFICULTIES = {
   HARD: 'Hard'
 }
 
-interface SelectDifficultyProps {
-  onChange: (difficulty: string) => void  
+interface IProps {
+  onChange: (difficulty: string) => void
 }
 
-export default function SelectDifficulty(props: SelectDifficultyProps) {
-  const { onChange } = props 
+export default function SelectDifficulty(props: IProps): ReactElement {
+  const { onChange } = props
   const classes = useStyles()
   const [difficulty, setDifficulty] = useState(DIFFICULTIES.EASY)
   return (

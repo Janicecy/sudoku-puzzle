@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { SudokuGame } from './board'
-import { Board, Step, Cell } from '../../interface'
+import { SudokuGame } from './models/board'
+import React, { ReactElement, useState } from 'react'
+import { IBoard, IStep, ICell } from './typings'
 import SudokuBoard from './SudokuBoard';
 import InputBoard from './InputBoard';
 import { makeStyles } from "@mui/styles";
@@ -17,14 +17,9 @@ import {
   from '@mui/material';
 import UndoIcon from '@mui/icons-material/Undo';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import Header from '../Header'
 import SelectDifficulty from './SelectDifficulty'
-
-interface CircleButtonProps {
-  children: React.ReactNode
-  underText: string,
-  onClick?: () => void
-}
+import CircularButton from '../CircularButton';
 
 const useStyles = makeStyles({
   root: {
@@ -48,50 +43,20 @@ const useStyles = makeStyles({
   boldText: {
     fontWeight: 'bold !important'
   },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 30,
-    color: 'rgb(54 74 99)',
-    marginBottom: 10,
-    display: 'flex'
-  },
-  circle: {
-    height: 60,
-    width: 60,
-    backgroundColor: '#eaeef4',
-    borderRadius: '50%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-    cursor: 'pointer'
-  },
-  circleButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    marginLeft: 20
-  },
   buttonGroup: {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%'
   },
-  githubIcon: {
-    marginLeft: 'auto',
-    cursor: 'pointer',
-    color: 'black'
-  }
 })
 
 const game = new SudokuGame()
 
-export default function Sudoku() {
+export default function Sudoku(): ReactElement {
   const classes = useStyles()
-  const [board, setBoard] = useState<Board>(game.board)
-  const [activeCell, setActiveCell] = useState<Cell | null>(null)
+  const [board, setBoard] = useState<IBoard>(game.board)
+  const [activeCell, setActiveCell] = useState<ICell | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
 
   const handleNewGame = () => {
@@ -113,7 +78,7 @@ export default function Sudoku() {
     if (game.validate()) return
 
     const sleep = (ms: number) => new Promise(res => setTimeout(res, ms))
-    const steps: Step[] = game.autoPlay()
+    const steps: IStep[] = game.autoPlay()
     for (const step of steps) {
       game.setNum(step.coord, step.value)
       setBoard([...game.board])
@@ -122,34 +87,7 @@ export default function Sudoku() {
     setModalVisible(true)
   }
 
-  const CircleButton = (props: CircleButtonProps) => {
-    const { children, underText, onClick } = props
-    return (
-      <Box className={classes.circleButton}>
-        <Box onClick={onClick} className={classes.circle}>
-          {children}
-        </Box>
-        <Typography color='primary'>{underText}</Typography>
-      </Box>
-    )
-  }
-
-  const Header = () => {
-    return (
-      <Box className={classes.header}>
-        <div>Sudoku</div>
-        <a
-          rel="noopener noreferrer"
-          target='_blank'
-          className={classes.githubIcon}
-          href='https://github.com/Janicecy/sudoku-puzzle'>
-          <GitHubIcon />
-        </a>
-      </Box>
-    )
-  }
-
-  const GameWonDialog = () => {
+  const GameWonDialog = (): ReactElement => {
     return (
       <Dialog open={modalVisible}>
         <DialogContent>
@@ -186,7 +124,7 @@ export default function Sudoku() {
       <Box className={classes.game}>
         <SudokuBoard
           board={board}
-          activeCellOnChange={(cell: Cell) => setActiveCell(cell)}
+          activeCellOnChange={(cell: ICell) => setActiveCell(cell)}
         />
         <Box className={classes.controlPanel}>
           <Button
@@ -197,13 +135,12 @@ export default function Sudoku() {
           </Button>
 
           <Box className={classes.buttonGroup}>
-            <CircleButton onClick={erase} underText={'Erase'} >
+            <CircularButton onClick={erase} underText={'Erase'} >
               <UndoIcon color='primary' />
-            </CircleButton>
-
-            <CircleButton onClick={autoPlay} underText='Autoplay' >
+            </CircularButton>
+            <CircularButton onClick={autoPlay} underText='Autoplay' >
               <PlayCircleOutlineIcon color='primary' />
-            </CircleButton>
+            </CircularButton>
           </Box>
 
           <InputBoard numberOnClick={handleNumOnClick} />

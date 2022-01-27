@@ -2,9 +2,9 @@ import _ from 'lodash'
 import { makeStyles } from "@mui/styles";
 import { Button, Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-interface InputBoardProps {
+interface IProps {
   numberOnClick: (num: number) => void
 }
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function InputBoard(props: InputBoardProps): JSX.Element {
+export default function InputBoard(props: IProps): ReactElement {
   const { numberOnClick } = props
   const classes = useStyles()
   return (

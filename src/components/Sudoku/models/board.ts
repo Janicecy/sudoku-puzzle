@@ -1,9 +1,9 @@
 import _ from 'lodash'
-import { Board, Coordinate, Step } from '../../interface'
-import { DIFFICULTIES } from './SelectDifficulty'
+import { IBoard, ICoordinate, IStep } from '../typings'
+import { DIFFICULTIES } from '../SelectDifficulty'
 export const BOARD_SIZE = 9
 
-export const isValid = (bd: Board, coord: Coordinate, num: string): boolean => {
+export const isValid = (bd: IBoard, coord: ICoordinate, num: string): boolean => {
   const { col, row } = coord
   for (let i = 0; i < 9; i++) {
     const offsetRow = (Math.floor(row / 3)) * 3 + Math.floor(i / 3)
@@ -16,7 +16,7 @@ export const isValid = (bd: Board, coord: Coordinate, num: string): boolean => {
   return true
 }
 
-const backtrack = (bd: Board, coord: Coordinate, steps: Step[] = []): boolean => {
+const backtrack = (bd: IBoard, coord: ICoordinate, steps: IStep[] = []): boolean => {
   const { col, row } = coord
   if (col === BOARD_SIZE) return backtrack(bd, { row: row + 1, col: 0 }, steps)
   if (row === BOARD_SIZE) return true
@@ -36,8 +36,8 @@ const backtrack = (bd: Board, coord: Coordinate, steps: Step[] = []): boolean =>
 
 const initBoard = (difficulty: string) => {
   // init empty 9x9 board 
-  const twoDArray: Board = _.range(BOARD_SIZE).map(() => Array(BOARD_SIZE).fill(""))
-  const board: Board = twoDArray.map((arr, row) => arr.map((v, col) => ({
+  const twoDArray: IBoard = _.range(BOARD_SIZE).map(() => Array(BOARD_SIZE).fill(""))
+  const board: IBoard = twoDArray.map((arr, row) => arr.map((v, col) => ({
     coord: { row, col },
     val: "",
     disabled: false
@@ -76,8 +76,8 @@ const initBoard = (difficulty: string) => {
 
 
 class SudokuGame {
-  board: Board = []
-  steps: Step[] = []
+  board: IBoard = []
+  steps: IStep[] = []
   difficulty: string = DIFFICULTIES.EASY
 
   constructor() {
@@ -93,13 +93,13 @@ class SudokuGame {
     this.difficulty = newVal
   }
 
-  setNum(coord: Coordinate, num: string) {
+  setNum(coord: ICoordinate, num: string) {
     if (this.board[coord.row][coord.col].disabled) return
     if (num === this.board[coord.row][coord.col].val) return
     this.set(coord, num)
   }
 
-  set(coord: Coordinate, num: string) {
+  set(coord: ICoordinate, num: string) {
     this.board[coord.row][coord.col] = {
       ...this.board[coord.row][coord.col],
       val: num,
@@ -109,7 +109,7 @@ class SudokuGame {
 
   undo(): boolean {
     if (this.steps.length === 0) return false
-    const { coord }: Step = this.steps.pop() as Step
+    const { coord }: IStep = this.steps.pop() as IStep
 
     this.board[coord.row][coord.col] = {
       ...this.board[coord.row][coord.col],
@@ -130,7 +130,7 @@ class SudokuGame {
   }
 
   autoPlay() {
-    const steps: Step[] = []
+    const steps: IStep[] = []
     while (this.undo());
     const newBoard = _.cloneDeep(this.board)
     backtrack(newBoard, { row: 0, col: 0 }, steps)
